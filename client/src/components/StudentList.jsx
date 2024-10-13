@@ -57,6 +57,7 @@ const StudentList = () => {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
+              <th>Marks</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -67,6 +68,7 @@ const StudentList = () => {
                   <td>{student.first_name}</td>
                   <td>{student.last_name}</td>
                   <td>{student.email}</td>
+                  <td>{student.marks ?? "N/A"}</td>
                   <td>
                     <Link
                       to={`/edit/${student.student_id}`}
@@ -89,7 +91,7 @@ const StudentList = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="text-center">
+                <td colSpan="5" className="text-center">
                   No students found.
                 </td>
               </tr>

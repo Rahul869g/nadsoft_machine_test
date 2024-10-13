@@ -2,10 +2,10 @@ const studentModel = require("../models/studentModel");
 
 // Get students with pagination
 const getStudents = async (req, res) => {
-  const { page = 1, limit = 3 } = req.query;
+  const { page = 1, limit = 10 } = req.query;
 
   try {
-    // Fetch students with pagination
+    // Fetch students with pagination and marks
     const students = await studentModel.getStudents(page, limit);
 
     // Fetch total count of students
@@ -40,13 +40,14 @@ const getStudentById = async (req, res) => {
 
 // Create new student
 const addStudent = async (req, res) => {
-  const { first_name, last_name, dob, email } = req.body;
+  const { first_name, last_name, dob, email, marks } = req.body;
   try {
     const newStudent = await studentModel.addStudent({
       first_name,
       last_name,
       dob,
-      email
+      email,
+      marks
     });
     res.status(201).json(newStudent);
   } catch (error) {
@@ -57,13 +58,14 @@ const addStudent = async (req, res) => {
 // Update student
 const updateStudent = async (req, res) => {
   const { id } = req.params;
-  const { first_name, last_name, dob, email } = req.body;
+  const { first_name, last_name, dob, email, marks } = req.body;
   try {
     const updatedStudent = await studentModel.updateStudent(id, {
       first_name,
       last_name,
       dob,
-      email
+      email,
+      marks // Pass the marks to the update function
     });
     res.json(updatedStudent);
   } catch (error) {

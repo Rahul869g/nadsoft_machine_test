@@ -15,7 +15,8 @@ const StudentForm = () => {
     first_name: "",
     last_name: "",
     dob: "",
-    email: ""
+    email: "",
+    marks: "" // Added marks field
   });
   const [loading, setLoading] = useState(false); // Loading state
 
@@ -29,12 +30,13 @@ const StudentForm = () => {
             first_name: student.first_name || "",
             last_name: student.last_name || "",
             dob: student.dob ? student.dob.split("T")[0] : "",
-            email: student.email || ""
+            email: student.email || "",
+            marks: student.marks || ""
           });
         } catch (error) {
           Swal.fire("Error", "Failed to fetch student data", "error");
         } finally {
-          setLoading(false); // Set loading false
+          setLoading(false);
         }
       };
       fetchStudent();
@@ -116,6 +118,17 @@ const StudentForm = () => {
               required
             />
           </div>
+          <div className="form-group">
+            <label>Marks</label>
+            <input
+              type="number"
+              className="form-control"
+              name="marks"
+              value={formData.marks}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <button type="submit" className="btn btn-success mt-2">
             {id && id !== "new" ? "Update" : "Create"}
           </button>
@@ -123,7 +136,13 @@ const StudentForm = () => {
             type="button"
             className="btn btn-secondary mt-2 ms-2"
             onClick={() =>
-              setFormData({ first_name: "", last_name: "", dob: "", email: "" })
+              setFormData({
+                first_name: "",
+                last_name: "",
+                dob: "",
+                email: "",
+                marks: ""
+              })
             }
           >
             Clear
